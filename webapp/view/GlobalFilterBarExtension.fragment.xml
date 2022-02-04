@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<smartfilterbar:ControlConfiguration id="maintOrderMonitorReferenceDateRangeFilter" groupId="_BASIC" index="0" key="_ReferencePeriod"
+		label="{i18n>xfld.referencePeriod}" visibleInAdvancedArea="true">
+		<smartfilterbar:customControl>
+			<Select id="maintOrderMonitorPredefinedReferencePeriodSelect" change="onReferencePeriodSelectionChanged"
+				ariaLabelledBy="ovpGlobalFilter-filterItem-___INTERNAL_-_ReferencePeriod">
+				<!-- We don't set keys for these Items on purpose. If keys were provided, 
+					SmartFilterBar would recognize this field when generating the "filter string" (collapsed mode) -->
+				<core:Item customData:referencePeriodKey="THIS_WEEK" text="{i18n>xlst.timePeriodThisWeek}"/>
+				<core:Item customData:referencePeriodKey="NEXT_WEEK" text="{i18n>xlst.timePeriodNextWeek}"/>
+				<core:Item customData:referencePeriodKey="IN_2_WEEKS" text="{i18n>xlst.timePeriodInTwoWeeks}"/>
+				<core:Item customData:referencePeriodKey="CUSTOM" text="{i18n>xlst.timePeriodCustom}"/>
+			</Select>
+		</smartfilterbar:customControl>
+	</smartfilterbar:ControlConfiguration>
+	<smartfilterbar:ControlConfiguration groupId="_BASIC" index="0" key="_CustomReferenceDate" label="{i18n>xfld.referenceDate}"
+		visibleInAdvancedArea="true">
+		<smartfilterbar:customControl>
+			<DateRangeSelection id="maintOrderMonitorReferenceDateRange" change="onReferenceDateRangeChanged"/>
+		</smartfilterbar:customControl>
+	</smartfilterbar:ControlConfiguration>
+</core:FragmentDefinition>

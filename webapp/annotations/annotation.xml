@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+    </edmx:Reference>
+    <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measure" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZEAM_ORDER_MONITOR_SRV/$metadata">
+        <edmx:Include Alias="ZEAM_ORDER_MONITOR_SRV" Namespace="ZEAM_ORDER_MONITOR_SRV" />
+    </edmx:Reference>
+    <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1" />
+    </edmx:Reference>
+    <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/OverdueDays">
+                <Annotation Term="Org.OData.Measures.V1.Unit" String="{@i18n&gt;xtxt.overdueOrdersDays}" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ">
+                <Annotation Term="UI.DataPoint" Qualifier="OverdueDays">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="OverdueDays" />
+                        <PropertyValue Property="Criticality" EnumMember="com.sap.vocabularies.UI.v1.CriticalityType/Negative" />
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ">
+                <Annotation Term="UI.DataPoint" Qualifier="MaintPriorityDesc">
+                    <Record>
+                        <PropertyValue Property="Value" Path="MaintPriorityDesc" />
+                        <PropertyValue Property="Title" String="Priority Text" />
+                        <PropertyValue Property="Criticality" Path="MaintPriorityColorCode" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Find Maintenance Order" />
+                            <PropertyValue Property="SemanticObject" String="MaintenanceOrder" />
+                            <PropertyValue Property="Action" String="listOrderAndOperation" />
+                            <PropertyValue Property="RequiresContext" Bool="false" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintenanceOrder" />
+                            <!-- <PropertyValue Property="Value" Path="MaintenanceOrderDesc" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#OverdueDays" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintenanceOrderDesc" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintenanceOrderTypeName" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#MaintPriorityDesc" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaintenanceActivityTypeName" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MainWorkCenterText" />
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup" />
+                            <Annotation Term="UI.IsSummary" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Cost Estimated / Planned / Actual" />
+                                    <PropertyValue Property="Value" Path="MaintOrdTotalCost" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record> -->
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n&gt;MaintOrdHasOpenPurchaseOrders}" />
+                                    <PropertyValue Property="Value" Path="MaintOrdHasOpenPurchaseOrders" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n&gt;MaintOrderHasOpenReservations}" />
+                                    <PropertyValue Property="Value" Path="MaintOrderHasOpenReservations" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n&gt;MaintOrdHasOpenServices}" />
+                                    <PropertyValue Property="Value" Path="MaintOrdHasOpenServices" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record>
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="End Date" />
+                                    <PropertyValue Property="Value" Path="ReferenceDate" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record> -->
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n&gt;PersonResponsibleName}" />
+                                    <PropertyValue Property="Value" Path="PersonResponsibleName" />
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="{@i18n&gt;Order}" />
+                        <PropertyValue Property="TypeNamePlural" String="{@i18n&gt;xtit.ordersForCompletion}" />
+                        <!-- <PropertyValue Property="ImageUrl" Path="MaintenanceOrderThumbnailURL" /> -->
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="MaintenanceOrder" />
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="MaintenanceOrderDesc" />
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <!-- <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Orders for Completion" />
+                            <PropertyValue Property="SemanticObject" String="MaintenanceOrder" />
+                            <PropertyValue Property="Action" String="displayFactSheet" />
+                            <PropertyValue Property="RequiresContext" Bool="false" />
+                        </Record>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Edit" />
+                            <PropertyValue Property="SemanticObject" String="MaintenanceOrder" />
+                            <PropertyValue Property="Action" String="change" />
+                            <PropertyValue Property="RequiresContext" Bool="false" />
+                        </Record>
+                    </Collection>
+                </Annotation> -->
+                <Annotation Term="UI.PresentationVariant" Qualifier="OrdersForCompletionPresentation">
+                    <Record>
+                        <PropertyValue Property="Text" String="Orders for Completion" />
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="ReferenceDate" />
+                                    <PropertyValue Property="Descending" Bool="false" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant">
+                    <Record>
+                        <PropertyValue Property="Text" String="Default Variant" />
+                        <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#OrdersForCompletionSelection" />
+                        <PropertyValue Property="PresentationVariant" Path="@UI.PresentationVariant#OrdersForCompletionPresentation" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="OrdersForCompletionSelection">
+                    <Record>
+                        <PropertyValue Property="Text" String="Orders for Completion" />
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="MaintenanceProcessingPhase" />
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                                                <PropertyValue Property="Low" String="2" />
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/MaintenancePlannerGroup">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Maintenance Planner Group" />
+                        <PropertyValue Property="CollectionPath" String="ZI_MaintPlnrGrpStdVH" />
+                        <PropertyValue Property="SearchSupported" Bool="false" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenancePlannerGroup" />
+                                    <PropertyValue Property="ValueListProperty" String="MaintenancePlannerGroup" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenancePlanningPlant" />
+                                    <PropertyValue Property="ValueListProperty" String="MaintenancePlanningPlant" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="MaintenancePlannerGroupName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/MaintenanceRevision">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Maintenance Revision" />
+                        <PropertyValue Property="CollectionPath" String="ZI_MaintenanceRevisionStdVH" />
+                        <PropertyValue Property="SearchSupported" Bool="false" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenancePlanningPlant" />
+                                    <PropertyValue Property="ValueListProperty" String="MaintenancePlanningPlant" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenanceRevision" />
+                                    <PropertyValue Property="ValueListProperty" String="MaintenanceRevision" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="MaintenanceRevisionDesc" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="RevisionStartDate" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="RevisionEndDate" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/MaintenanceActivityType">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Maintenance Activity Type" />
+                        <PropertyValue Property="CollectionPath" String="I_MaintActyTypeStdVH" />
+                        <PropertyValue Property="SearchSupported" Bool="false" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenanceActivityType" />
+                                    <PropertyValue Property="ValueListProperty" String="MaintenanceActivityType" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="MaintenanceActivityType_Text" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" />
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/MainWorkCenter">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Work Center By Semantic Key" />
+                        <PropertyValue Property="CollectionPath" String="I_WrkCtrBySemanticKeyStdVH" />
+                        <PropertyValue Property="SearchSupported" Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MainWorkCenter" />
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenter" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Plant" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenter_Text" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenterInternalID" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ/MaintenanceWorkCenter">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Work Center By Semantic Key" />
+                        <PropertyValue Property="CollectionPath" String="I_WrkCtrBySemanticKeyStdVH" />
+                        <PropertyValue Property="SearchSupported" Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MaintenanceWorkCenter" />
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenter" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Plant" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenter_Text" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WorkCenterInternalID" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/UserID">
+                <Annotation Term="UI.HiddenFilter" />
+            </Annotations>
+            <!-- <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/to_MaintenancePlanningPlant">
+                <Annotation Term="UI.HiddenFilter" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/to_MainWorkCenterPlant">
+                <Annotation Term="UI.HiddenFilter" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/to_MainWorkCenterVH">
+                <Annotation Term="UI.HiddenFilter" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/to_OrderTypeVH">
+                <Annotation Term="UI.HiddenFilter" />
+            </Annotations> -->
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>MainWorkCenter</PropertyPath>
+                        <PropertyPath>MaintenancePlannerGroup</PropertyPath>
+                        <PropertyPath>MaintenanceRevision</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/CompleteTechlyAndSetNotifSts">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceProcessingPhase">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <!-- <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/ControllingArea">
+                <Annotation Term="UI.Hidden" />
+            </Annotations> -->
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintOrdPersonResponsible">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrderInternalID">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/Currency">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MainWorkCenter">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/ResponsibleCostCenter">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlanningPlant">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrderType">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlannerGroup">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlant">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintObjectLocAcctAssgmtNmbr">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/Equipment">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <!-- <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrderThumbnailURL">
+                <Annotation Term="UI.IsImageURL" />
+            </Annotations> -->
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrder">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceOrder" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/ID">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintenanceOrder">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceOrder" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintenanceActivityType">
+                <Annotation Term="Common.Text" Path="MaintenanceActivityTypeName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintenanceOrderType">
+                <Annotation Term="Common.Text" Path="OrderTypeName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintPriority">
+                <Annotation Term="Common.Text" Path="MaintPriorityDesc">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintPriorityType">
+                <Annotation Term="Common.Text" Path="MaintPriorityTypeDesc">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/UserStatus">
+                <Annotation Term="Common.Text" Path="StatusName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/StatusProfile" />
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType">
+                <Annotation Term="UI.Chart" Qualifier="OrdersForPlanningByUserStatus">
+                    <Record Type="UI.ChartDefinitionType">
+                        <!-- <PropertyValue Property="Title" String="Unreleased Orders, by User Status" /> -->
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>StatusProfile</PropertyPath>
+                                <PropertyPath>UserStatus</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="StatusProfile" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="UserStatus" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOutstandingMaintOrders</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOutstandingMaintOrders" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOutstandingMaintOrders" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="OrdersForPlanningByOrderType">
+                    <Record Type="UI.ChartDefinitionType">
+                        <!-- <PropertyValue Property="Title" String="Unreleased Orders, by Order Type" /> -->
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>MaintenanceOrderType</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintenanceOrderType" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOutstandingMaintOrders</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOutstandingMaintOrders" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOutstandingMaintOrders" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="OrdersForPlanningByActivityType">
+                    <Record Type="UI.ChartDefinitionType">
+                        <!-- <PropertyValue Property="Title" String="Unreleased Orders, by Activity Type" /> -->
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>MaintenanceActivityType</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintenanceActivityType" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOutstandingMaintOrders</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOutstandingMaintOrders" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOutstandingMaintOrders" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="OrdersForPlanningByPriority">
+                    <Record Type="UI.ChartDefinitionType">
+                        <!-- <PropertyValue Property="Title" String="Unreleased Orders, by Priority" /> -->
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>MaintPriorityType</PropertyPath>
+                                <PropertyPath>MaintPriority</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintPriorityType" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintPriority" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOutstandingMaintOrders</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOutstandingMaintOrders" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOutstandingMaintOrders" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="NmbrOfOutstandingMaintOrders">
+                    <Record>
+                        <PropertyValue Property="Value" Path="NmbrOfOutstandingMaintOrders" />
+                        <PropertyValue Property="Title" String="{@i18n&gt;xtit.outstandingNotifsByUserStatus}" />
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Number" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Find Maintenance Notification" />
+                            <PropertyValue Property="SemanticObject" String="MaintenanceOrder" />
+                            <PropertyValue Property="Action" String="displayFactSheet" />
+                            <PropertyValue Property="RequiresContext" Bool="false" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="OrdersForPlanningPresentation">
+                    <Record>
+                        <PropertyValue Property="Text" String="Default" />
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="NmbrOfOutstandingMaintOrders" />
+                                    <PropertyValue Property="Descending" Bool="false" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="OrdersForPlanningSelectionPresentationVariant">
+                    <Record>
+                        <PropertyValue Property="Text" String="" />
+                        <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#OrdersForPlanningSelection" />
+                        <PropertyValue Property="PresentationVariant" Path="@UI.PresentationVariant#OrdersForPlanningPresentation" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="OrdersForPlanningSelection">
+                    <Record>
+                        <PropertyValue Property="Text" String="Not released, numbered user status only" />
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/ID">
+                <Annotation Term="UI.Hidden" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/MaintenanceNotification">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceNotification" />
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/MaintPriority">
+                <Annotation Term="Common.Text" Path="MaintPriorityDesc">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/MaintPriorityType">
+                <Annotation Term="Common.Text" Path="MaintPriorityTypeDesc">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/MaintenanceActivityType">
+                <Annotation Term="Common.Text" Path="MaintenanceActivityTypeName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/NotificationType">
+                <Annotation Term="Common.Text" Path="NotificationTypeName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType">
+                <Annotation Term="UI.Chart" Qualifier="NotifsForScreeningByNotificationType">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/ColumnStacked" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <!-- <PropertyPath>StatusProfile</PropertyPath> -->                                
+                                <!-- <PropertyPath>UserStatus</PropertyPath> -->
+                                <PropertyPath>NotificationType</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>                               
+                                <!-- <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="StatusProfile" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record> -->
+                                <!-- <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="UserStatus" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Series" />
+                                </Record> -->
+                                 <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="NotificationType" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOpenMaintNotifications</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOpenMaintNotifications" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOpenMaintNotifications" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="NotifsForScreeningByPriority">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/ColumnStacked" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>MaintPriorityType</PropertyPath>
+                                <!-- <PropertyPath>StatusProfile</PropertyPath> -->
+                                <PropertyPath>MaintPriority</PropertyPath>
+                                <!-- <PropertyPath>UserStatus</PropertyPath> -->
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintPriorityType" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Series" />
+                                </Record>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="MaintPriority" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                                <!-- <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="StatusProfile" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record> -->
+                                <!-- <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="UserStatus" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record> -->
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>NmbrOfOpenMaintNotifications</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="NmbrOfOpenMaintNotifications" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#NmbrOfOpenMaintNotifications" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="NmbrOfOpenMaintNotifications">
+                    <Record>
+                        <PropertyValue Property="Value" Path="NmbrOfOpenMaintNotifications" />
+                        <PropertyValue Property="Title" String="Open Notifications" />
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Number" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="Label" String="Find Maintenance Notification" />
+                            <PropertyValue Property="SemanticObject" String="MaintenanceNotification" />
+                            <PropertyValue Property="Action" String="displayFactSheet" />
+                            <PropertyValue Property="RequiresContext" Bool="false" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="NotifsForScreeningPresentation">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="NmbrOfOpenMaintNotifications" />
+                                    <PropertyValue Property="Descending" Bool="false" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="NotifsForScreeningSelectionPresentationVariant">
+                    <Record>
+                        <PropertyValue Property="Text" String="" />
+                        <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#NotifsForScreeningSelection" />
+                        <PropertyValue Property="PresentationVariant" Path="@UI.PresentationVariant#NotifsForScreeningPresentation" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="NotifsForScreeningSelection">
+                    <Record>
+                        <PropertyValue Property="Text" String="" />
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

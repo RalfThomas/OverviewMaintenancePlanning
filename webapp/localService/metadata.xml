@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://smiwddwd3400:44306/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='GW_PP2_LANDSCAPE')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZEAM_ORDER_MONITOR_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="C_OverdueMaintenanceOrderQ" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaintenanceOrder"/>
+                </Key>
+                <Property Name="ReferenceDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Basic fin. date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OverdueDays" Type="Edm.Int32" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MainWorkCenterText" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Work Center Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MainWorkCenterPlant" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MainWorkCenter" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Work Center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintPriorityDesc" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintPriority" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Priority" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceWorkCenterText" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Work Center Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceWorkCenterPlant" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceWorkCenter" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Work Center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceRevision" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Revision" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenancePlant" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Location plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Planning plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Planner group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceOrderTypeName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Order Type Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceOrderType" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Order Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceOrderDesc" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Order Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Order" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceActivityTypeName" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="MAT descriptn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaintenanceActivityType" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Activity Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZC_MaintNotifForScreeningQType" sap:semantics="aggregate" sap:label="Maintenance Notifications for Screening" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="MaintenanceNotification" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Notification"/>
+                <Property Name="UserStatus" Type="Edm.String" MaxLength="4" sap:attribute-for="StatusProfile" sap:text="StatusName" sap:label="User Status"/>
+                <Property Name="StatusName" Type="Edm.String" MaxLength="30" sap:aggregation-role="dimension" sap:label="Status"/>
+                <Property Name="StatusProfile" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="StatusProfileName"/>
+                <Property Name="StatusProfileName" Type="Edm.String" MaxLength="30" sap:aggregation-role="dimension" sap:label="Text"/>
+                <Property Name="ReferenceDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Req. Start Date"/>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planner group"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planning plant"/>
+                <Property Name="MainWorkCenter" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="MainWorkCenterPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Plant for work cent."/>
+                <Property Name="MaintenanceRevision" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Revision"/>
+                <Property Name="MaintPriority" Type="Edm.String" MaxLength="1" sap:attribute-for="MaintPriorityType" sap:display-format="UpperCase" sap:text="MaintPriorityDesc" sap:label="Priority"/>
+                <Property Name="NmbrOfOpenMaintNotifications" Type="Edm.Decimal" Precision="9" Scale="0" sap:aggregation-role="measure" sap:label="Offene Meldungen" sap:filterable="false"/>
+                <Property Name="MaintPriorityType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="MaintPriorityTypeDesc" sap:label="Priority type"/>
+                <Property Name="MaintPriorityTypeDesc" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Priority Type Text"/>
+                <Property Name="MaintPriorityDesc" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Priority text"/>
+                <Property Name="MaintenanceActivityType" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="MaintenanceActivityTypeName" sap:label="Activity Type"/>
+                <Property Name="MaintenanceActivityTypeName" Type="Edm.String" MaxLength="30" sap:aggregation-role="dimension" sap:label="MAT description"/>
+                <Property Name="NotificationType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="NotificationTypeName" sap:label="Notification Type"/>
+                <Property Name="NotificationTypeName" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Notification type"/>
+            </EntityType>
+            <EntityType Name="ZI_MaintPlnrGrpStdVHType" sap:label="Maintenance Planner Group" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaintenancePlannerGroup"/>
+                    <PropertyRef Name="MaintenancePlanningPlant"/>
+                </Key>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:text="MaintenancePlannerGroupName" sap:label="Planner Group"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Planning plant"/>
+                <Property Name="MaintenancePlannerGroupName" Type="Edm.String" MaxLength="18" sap:label="Planner Group Name"/>
+            </EntityType>
+            <EntityType Name="ZC_MaintOrderForCompletionQType" sap:label="Orders for Completion" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaintenanceOrder"/>
+                </Key>
+                <Property Name="MaintenanceOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:text="MaintenanceOrderDesc" sap:label="Order"/>
+                <Property Name="MaintenanceOrderDesc" Type="Edm.String" MaxLength="40" sap:label="Order Description"/>
+                <Property Name="ReferenceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Basic finish date"/>
+                <Property Name="PersonResponsibleName" Type="Edm.String" MaxLength="80" sap:label="Full Name"/>
+                <Property Name="MaintOrderHasOpenReservations" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Checkbox"/>
+                <Property Name="MaintOrdHasOpenPurchaseOrders" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Checkbox"/>
+                <Property Name="MaintOrdHasOpenServices" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Checkbox"/>
+                <Property Name="CompleteTechlyAndSetNotifSts" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Complete (Tech.)"/>
+                <Property Name="MaintenanceProcessingPhase" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Phase"/>
+                <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Controlling Area"/>
+                <Property Name="MaintOrdPersonResponsible" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Partner"/>
+                <Property Name="MaintenanceOrderInternalID" Type="Edm.String" MaxLength="22" sap:display-format="UpperCase" sap:label="Object number"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="MainWorkCenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="ResponsibleCostCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Respons. Cost Center"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Planning plant"/>
+                <Property Name="MaintenanceOrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Order Type"/>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Planner group"/>
+                <Property Name="MaintenancePlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Maintenance plant"/>
+                <Property Name="MaintObjectLocAcctAssgmtNmbr" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Loc/Acct Assignment"/>
+                <Property Name="Equipment" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Equipment"/>
+            </EntityType>
+            <EntityType Name="ZC_MaintOrdersForPlanningQType" sap:semantics="aggregate" sap:label="Maintenance Orders for Planning" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="MaintenanceOrder" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Order"/>
+                <Property Name="MaintenanceActivityType" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="MaintenanceActivityTypeName" sap:label="Activity Type"/>
+                <Property Name="MaintenanceActivityTypeName" Type="Edm.String" MaxLength="30" sap:aggregation-role="dimension" sap:label="MAT description"/>
+                <Property Name="MaintenanceOrderType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="OrderTypeName" sap:label="Order Type"/>
+                <Property Name="OrderTypeName" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:label="Order Type Name"/>
+                <Property Name="MaintPriority" Type="Edm.String" MaxLength="1" sap:attribute-for="MaintPriorityType" sap:display-format="UpperCase" sap:text="MaintPriorityDesc" sap:label="Priority"/>
+                <Property Name="MaintPriorityDesc" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Priority text"/>
+                <Property Name="MaintPriorityType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="MaintPriorityTypeDesc" sap:label="Priority type"/>
+                <Property Name="MaintPriorityTypeDesc" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Priority Type Text"/>
+                <Property Name="MainWorkCenter" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="MainWorkCenterPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="ReferenceDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Basic Start Date"/>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planner group"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planning plant"/>
+                <Property Name="MaintenanceRevision" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Revision"/>
+                <Property Name="NotificationType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Notification Type"/>
+                <Property Name="Equipment" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Equipment"/>
+                <Property Name="MaintObjectLocAcctAssgmtNmbr" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Loc/Acct Assignment"/>
+                <Property Name="UserStatus" Type="Edm.String" MaxLength="4" sap:attribute-for="StatusProfile" sap:display-format="UpperCase" sap:text="StatusName" sap:label="User Status"/>
+                <Property Name="StatusName" Type="Edm.String" MaxLength="30" sap:aggregation-role="dimension" sap:display-format="UpperCase"/>
+                <Property Name="StatusProfile" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase"/>
+                <Property Name="NmbrOfOutstandingMaintOrders" Type="Edm.Decimal" Precision="9" Scale="0" sap:aggregation-role="measure" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZC_MaintPlanningOvwPgFiltersType" sap:label="Filters for Maintenance Planning OverV" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="UserID" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase"/>
+                <Property Name="MainWorkCenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase"/>
+                <Property Name="MainWorkCenterPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase"/>
+                <Property Name="MaintenancePlannerGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Planner Group"/>
+                <Property Name="MaintenanceRevision" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Revision"/>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Planning Plant"/>
+                <Property Name="NotificationType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Notification Type"/>
+                <Property Name="MaintenanceOrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Order Type"/>
+            </EntityType>
+            <EntityType Name="ZI_MaintenanceRevisionStdVHType" sap:label="Maintenance Revision" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaintenancePlanningPlant"/>
+                    <PropertyRef Name="MaintenanceRevision"/>
+                </Key>
+                <Property Name="MaintenancePlanningPlant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Planning plant"/>
+                <Property Name="MaintenanceRevision" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:text="MaintenanceRevisionDesc" sap:label="Revision"/>
+                <Property Name="MaintenanceRevisionDesc" Type="Edm.String" MaxLength="40" sap:label="Rev. description"/>
+                <Property Name="RevisionStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Beginndatum"/>
+                <Property Name="RevisionEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Endedatum"/>
+            </EntityType>
+            <EntityContainer Name="ZEAM_ORDER_MONITOR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="C_OverdueMaintenanceOrderQSet" EntityType="ZEAM_ORDER_MONITOR_SRV.C_OverdueMaintenanceOrderQ" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_MaintNotifForScreeningQ" EntityType="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_MaintPlnrGrpStdVH" EntityType="ZEAM_ORDER_MONITOR_SRV.ZI_MaintPlnrGrpStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_MaintOrderForCompletionQ" EntityType="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_MaintOrdersForPlanningQ" EntityType="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_MaintPlanningOvwPgFilters" EntityType="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_MaintenanceRevisionStdVH" EntityType="ZEAM_ORDER_MONITOR_SRV.ZI_MaintenanceRevisionStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://smiwddwd3400:44306/sap/opu/odata/sap/ZEAM_ORDER_MONITOR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://smiwddwd3400:44306/sap/opu/odata/sap/ZEAM_ORDER_MONITOR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

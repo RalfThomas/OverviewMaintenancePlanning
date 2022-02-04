@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Namespace="Org.OData.Core.V1" Alias="Core"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measure"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/EAM_ORDER_MONITOR/$metadata">
+		<edmx:Include Alias="EAM_ORDER_MONITOR" Namespace="EAM_ORDER_MONITOR"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="EAM_ORDER_MONITOR.C_OverdueMaintenanceOrderQType/OverdueDays">
+				<Annotation Term="Org.OData.Measures.V1.Unit" String="{@i18n&gt;xtxt.overdueOrdersDays}"/>
+			</Annotations>
+			<Annotations Target="EAM_ORDER_MONITOR.C_OverdueMaintenanceOrderQType">
+				<Annotation Term="UI.DataPoint" Qualifier="OverdueDays">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Value" Path="OverdueDays"/>
+						<PropertyValue Property="Criticality" EnumMember="com.sap.vocabularies.UI.v1.CriticalityType/Negative"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="EAM_ORDER_MONITOR.C_MaintOrdCompPurOrderQType">
+				<Annotation  Term="UI.Identification" Qualifier="HeaderNotApproved">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="displayNotApproved" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xtit.purchaseOrderNotApproved}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation  Term="UI.Identification" Qualifier="HeaderMissingComponents">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="displayMissingComponents" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xtit.materialMissingDelivery}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation  Term="UI.Identification" Qualifier="Card">
+					<Collection>
+						<!-- Header navigation (hidden in toolbar) -->
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="displayFactSheet" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xbut.displayPurchaseOrder}"/>
+						</Record>
+						<!-- Display Maintenance Order / Maintenance Order Operation: -->
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="MaintenanceOrder"/>
+							<PropertyValue Property="Action">
+								<If>
+									<Ne>
+										<Path>MaintenanceOrderOperation</Path>
+										<String/>
+									</Ne>
+									<String>displayOperationFactSheet</String>
+									<String>displayFactSheet</String>
+								</If>
+							</PropertyValue>
+							<PropertyValue Property="Label">
+								<If>
+									<Ne>
+										<Path>MaintenanceOrderOperation</Path>
+										<String/>
+									</Ne>
+									<String>{@i18n&gt;xbut.displayMaintenanceOrderOperation}</String>
+									<String>{@i18n&gt;xbut.displayMaintenanceOrder}</String>
+								</If>
+							</PropertyValue> 
+						</Record> 
+						<!-- Display Purchase Order: -->
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="displayFactSheet" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xbut.displayPurchaseOrder}"/>
+						</Record>
+					</Collection> 
+				</Annotation>
+				<Annotation Term="UI.Facets" Qualifier="NotApproved">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="ID" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#QuickViewPONotApproved"/>
+							<Annotation Term="UI.IsSummary"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Facets" Qualifier="MaterialMissing">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="ID" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#QuickViewMaterialMissing"/>
+							<Annotation Term="UI.IsSummary"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="QuickViewPONotApproved">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.suppliedBy}"/>
+									<PropertyValue Property="Value" Path="Supplier_Text"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.purchaseOrder}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>PurchaseOrder</Path>
+											<String><![CDATA[ / ]]></String>
+											<Path>PurchaseOrderItem</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.requestedQuantity}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>OrderQuantity</Path>
+											<String><![CDATA[ ]]></String>
+											<Path>PurchaseOrderQuantityUnit</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label">
+										<If>
+											<Ne>
+												<Path>MaintenanceOrderOperation</Path>
+												<String/>
+											</Ne>
+											<String>{@i18n&gt;xfld.orderOperation}</String>
+											<String>{@i18n&gt;xfld.order}</String>
+										</If>
+									</PropertyValue>
+									<PropertyValue Property="Value">
+										<!-- OVP's AnnotationHelper will detect <Apply>, but not <If>, so <Apply> has to come first -->
+										<Apply Function="odata.concat">
+											<If>
+												<Ne>
+													<Path>MaintenanceOrderOperation_Text</Path>
+													<String/>
+												</Ne>
+												<Path>MaintenanceOrderOperation_Text</Path>
+												<Path>MaintenanceOrder_Text</Path>
+											</If>
+											<String><![CDATA[ (]]></String>
+											<Path>MaintenanceOrder</Path>
+											<If>
+												<Ne>
+													<Path>MaintenanceOrderOperation</Path>
+													<String/>
+												</Ne>
+												<String><![CDATA[ / ]]></String>
+												<String/>
+											</If>
+											<Path>MaintenanceOrderOperation</Path>
+											<String><![CDATA[)]]></String>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.requirementDate}"/>
+									<PropertyValue Property="Value" Path="ReferenceDate"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.orderPriority}"/>
+									<PropertyValue Property="Value" Path="MaintPriority_Text"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="QuickViewMaterialMissing">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.suppliedBy}"/>
+									<PropertyValue Property="Value" Path="Supplier_Text"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.purchaseOrder}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>PurchaseOrder</Path>
+											<String><![CDATA[ / ]]></String>
+											<Path>PurchaseOrderItem</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.deliveredQuantity}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>ReceivedQuantity</Path>
+											<String><![CDATA[ ]]></String>
+											<String>{@i18n&gt;xtxt.deliveredQuantityXOfY}</String>
+											<String><![CDATA[ ]]></String>
+											<Path>OrderQuantity</Path>
+											<String><![CDATA[ ]]></String>
+											<Path>PurchaseOrderQuantityUnit</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label">
+										<If>
+											<Ne>
+												<Path>MaintenanceOrderOperation</Path>
+												<String/>
+											</Ne>
+											<String>{@i18n&gt;xfld.orderOperation}</String>
+											<String>{@i18n&gt;xfld.order}</String>
+										</If>
+									</PropertyValue>
+									<PropertyValue Property="Value">
+										<!-- OVP's AnnotationHelper will detect <Apply>, but not <If>, so <Apply> has to come first -->
+										<Apply Function="odata.concat">
+											<If>
+												<Ne>
+													<Path>MaintenanceOrderOperation_Text</Path>
+													<String/>
+												</Ne>
+												<Path>MaintenanceOrderOperation_Text</Path>
+												<Path>MaintenanceOrder_Text</Path>
+											</If>
+											<String><![CDATA[ (]]></String>
+											<Path>MaintenanceOrder</Path>
+											<If>
+												<Ne>
+													<Path>MaintenanceOrderOperation</Path>
+													<String/>
+												</Ne>
+												<String><![CDATA[ / ]]></String>
+												<String/>
+											</If>
+											<Path>MaintenanceOrderOperation</Path>
+											<String><![CDATA[)]]></String>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.requirementDate}"/>
+									<PropertyValue Property="Value" Path="ReferenceDate"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.orderPriority}"/>
+									<PropertyValue Property="Value" Path="MaintPriority_Text"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+					<!-- Minimum set of fields for $select -->
+					<Collection>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Material"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaterialName"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaterialThumbnailURL"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrder"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrderOperation"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrderOperation_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrder_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="ReferenceDate"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintPriority_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="OrderQuantity"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrderQuantityUnit"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Supplier"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Supplier_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrder"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+						</Record>
+        			</Collection>
+        		</Annotation>
+        		<Annotation Term="com.sap.vocabularies.UI.v1.LineItem" Qualifier="MaterialMissingLineItem">
+        			<!-- $select fields for "Material Missing Delivery" -->
+					<Collection>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Material"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaterialName"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaterialThumbnailURL"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrder"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrderOperation"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrderOperation_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintenanceOrder_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="ReferenceDate"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="MaintPriority_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="OrderQuantity"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrderQuantityUnit"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Supplier"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="Supplier_Text"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrder"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataField">
+							<PropertyValue Property="Value" Path="ReceivedQuantity"/>
+						</Record>
+					</Collection>
+        		</Annotation>
+			</Annotations>
+			<Annotations Target="EAM_ORDER_MONITOR.C_MaintOrdCompPurRequisitionQType">
+				<Annotation  Term="UI.Identification" Qualifier="HeaderNotApproved">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseRequisitionItem"/>
+							<PropertyValue Property="Action" String="displayOutstanding" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xtit.purchaseRequisitionNotApproved}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation  Term="UI.Identification" Qualifier="HeaderNotConverted">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseRequisitionItem"/>
+							<PropertyValue Property="Action" String="displayOutstanding" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xtit.purchaseRequisitionNotConvertedToPurchaseOrder}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation  Term="UI.Identification" Qualifier="Card">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseRequisition"/>
+							<PropertyValue Property="Action" String="displayFactSheet" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xbut.displayPurchaseRequisition}"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="MaintenanceOrder"/>
+							<PropertyValue Property="Action">
+								<If>
+									<Ne>
+										<Path>MaintenanceOrderOperation</Path>
+										<String/>
+									</Ne>
+									<String>displayOperationFactSheet</String>
+									<String>displayFactSheet</String>
+								</If>
+							</PropertyValue>
+							<PropertyValue Property="Label">
+								<If>
+									<Ne>
+										<Path>MaintenanceOrderOperation</Path>
+										<String/>
+									</Ne>
+									<String>{@i18n&gt;xbut.displayMaintenanceOrderOperation}</String>
+									<String>{@i18n&gt;xbut.displayMaintenanceOrder}</String>
+								</If>
+							</PropertyValue> 
+						</Record> 
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseRequisition"/>
+							<PropertyValue Property="Action" String="displayFactSheet" />
+							<PropertyValue Property="Label" String="{@i18n&gt;xbut.displayPurchaseRequisition}"/>
+						</Record>
+					</Collection> 
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="ID" String="PurchaseRequisitionItem"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#QuickView"/>
+							<Annotation Term="UI.IsSummary"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="QuickView">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.suppliedBy}"/>
+									<PropertyValue Property="Value" Path="SupplierName"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.purchaseRequisition}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>PurchaseRequisition</Path>
+											<String><![CDATA[ / ]]></String>
+											<Path>PurchaseRequisitionItem</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.requestedQuantity}"/>
+									<PropertyValue Property="Value">
+										<Apply Function="odata.concat">
+											<Path>RequestedQuantity</Path>
+											<String><![CDATA[ ]]></String>
+											<Path>BaseUnit</Path>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label">
+										<If>
+											<Ne>
+												<Path>MaintenanceOrderOperation</Path>
+												<String/>
+											</Ne>
+											<String>{@i18n&gt;xfld.orderOperation}</String>
+											<String>{@i18n&gt;xfld.order}</String>
+										</If>
+									</PropertyValue>
+									<PropertyValue Property="Value">
+										<!-- OVP's AnnotationHelper will detect <Apply>, but not <If>, so <Apply> has to come first -->
+										<Apply Function="odata.concat">
+											<If>
+												<Ne>
+													<Path>OperationDescription</Path>
+													<String/>
+												</Ne>
+												<Path>OperationDescription</Path>
+												<Path>MaintenanceOrderDesc</Path>
+											</If>
+											<String><![CDATA[ (]]></String>
+											<Path>MaintenanceOrder</Path>
+											<If>
+												<Ne>
+													<Path>MaintenanceOrderOperation</Path>
+													<String/>
+												</Ne>
+												<String><![CDATA[ / ]]></String>
+												<String/>
+											</If>
+											<Path>MaintenanceOrderOperation</Path>
+											<String><![CDATA[)]]></String>
+										</Apply>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.requirementDate}"/>
+									<PropertyValue Property="Value" Path="ReferenceDate"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;xfld.orderPriority}"/>
+									<PropertyValue Property="Value" Path="MaintPriorityDesc"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

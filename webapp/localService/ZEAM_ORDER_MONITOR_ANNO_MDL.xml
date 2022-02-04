@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='GW_PP2_LANDSCAPE')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='GW_PP2_LANDSCAPE')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='GW_PP2_LANDSCAPE')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zeam_order_monitor_srv/$metadata">
+        <edmx:Include Namespace="ZEAM_ORDER_MONITOR_SRV" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zeam_order_monitor_anno_mdl.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintNotifForScreeningQType/MaintenanceNotification">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceNotification"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/CompleteTechlyAndSetNotifSts">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceProcessingPhase">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/ControllingArea">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintOrdPersonResponsible">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrderInternalID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/Currency">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MainWorkCenter">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/ResponsibleCostCenter">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlanningPlant">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrderType">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlannerGroup">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenancePlant">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintObjectLocAcctAssgmtNmbr">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/Equipment">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Hidden"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrderForCompletionQType/MaintenanceOrder">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceOrder"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintOrdersForPlanningQType/MaintenanceOrder">
+                <Annotation Term="Common.SemanticObject" String="MaintenanceOrder"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType/UserID">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="ZEAM_ORDER_MONITOR_SRV.ZC_MaintPlanningOvwPgFiltersType">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>MainWorkCenter</PropertyPath>
+                        <PropertyPath>MaintenancePlannerGroup</PropertyPath>
+                        <PropertyPath>MaintenanceRevision</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

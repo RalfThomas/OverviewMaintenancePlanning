@@ -1,0 +1,263 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "zi2d.eam.maintenanceplanner.ovps1",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{xtit.appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
+        },
+        "dataSources": {
+            "ZEAM_ORDER_MONITOR_SRV": {
+                "uri": "/sap/opu/odata/sap/ZEAM_ORDER_MONITOR_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "ZEAM_ORDER_MONITOR_ANNO_MDL",
+                        "LOCAL"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZEAM_ORDER_MONITOR_ANNO_MDL": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZEAM_ORDER_MONITOR_ANNO_MDL',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZEAM_ORDER_MONITOR_ANNO_MDL.xml"
+                }
+            },
+            "LOCAL": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "ui5template.smartTemplate",
+            "version": "1.40.12"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.32.0",
+            "libs": {
+                "sap.ui.core": {
+                    "lazy": false
+                },
+                "sap.ui.generic.app": {
+                    "lazy": false
+                },
+                "sap.suite.ui.generic.template": {
+                    "lazy": false
+                },
+                "sap.ovp": {
+                    "lazy": false
+                }
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "ZEAM_ORDER_MONITOR_SRV": {
+                "dataSource": "ZEAM_ORDER_MONITOR_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            },
+            "ZEAM_ORDER_MONITOR_ANALYTICAL": {
+                "preload": true,
+                "dataSource": "ZEAM_ORDER_MONITOR_SRV",
+                "settings": {
+                    "defaultCountMode": "None",
+                    "tokenHandling": false
+                }
+            },
+            "ZEAM_ORDER_MONITOR_TRANSACTIONAL": {
+                "preload": true,
+                "dataSource": "ZEAM_ORDER_MONITOR_SRV",
+                "settings": {
+                    "defaultCountMode": "Inline",
+                    "tokenHandling": false
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.ovp.app.Main": {
+                        "controllerName": "zi2d.eam.maintenanceplanner.ovps1.controller.MainExtension"
+                    }
+                },
+                "sap.ui.viewExtensions": {
+                    "sap.ovp.app.Main": {
+                        "SmartFilterBarControlConfigurationExtension|ZC_MaintPlanningOvwPgFiltersType": {
+                            "className": "sap.ui.core.Fragment",
+                            "fragmentName": "zi2d.eam.maintenanceplanner.ovps1.view.GlobalFilterBarExtension",
+                            "type": "XML"
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.platform.abap": {
+        "uri": ""
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.ovp": {
+        "globalFilterModel": "ZEAM_ORDER_MONITOR_SRV",
+        "globalFilterEntityType": "ZC_MaintPlanningOvwPgFiltersType",
+        "showDateInRelativeFormat": false,
+        "cards": {
+            "card_OverdueOrders": {
+                "model": "ZEAM_ORDER_MONITOR_TRANSACTIONAL",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "{{xtit.overdueOrders}}",
+                    "entitySet": "C_OverdueMaintenanceOrderQSet",
+                    "listFlavor": "standard",
+                    "listType": "extended",
+                    "sortOrder": "ascending",
+                    "customParams": "overdueOrders",
+                    "staticParameters": {
+                        "scenario": "overdueOrders"
+                    }
+                }
+            },
+            "card_OrdersForPlanning": {
+                "model": "ZEAM_ORDER_MONITOR_ANALYTICAL",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "{{xtit.ordersForPlanning}}",
+                    "subTitle": "{{xtit.ordersNotReleased}}",
+                    "entitySet": "ZC_MaintOrdersForPlanningQ",
+                    "customParams": "ordersForPlanning",
+                    "staticParameters": {
+                        "scenario": "planning"
+                    },
+                    "tabs": [
+                        {
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#OrdersForPlanningByPriority",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#NmbrOfOutstandingMaintOrders",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#OrdersForPlanningPresentation",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OrdersForPlanningSelection",
+                            "value": "{{xtit.chartTabByPriority}}"
+                        },
+                        {
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#OrdersForPlanningByOrderType",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#NmbrOfOutstandingMaintOrders",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#OrdersForPlanningPresentation",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OrdersForPlanningSelection",
+                            "value": "{{xtit.chartTabByOrderType}}"
+                        }
+                    ]
+                }
+            },
+            "card_NotificationsForScreening": {
+                "model": "ZEAM_ORDER_MONITOR_ANALYTICAL",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "{{xtit.notifsForScreening}}",
+                    "subTitle": "{{xtit.outstandingNotifsByUserStatus}}",
+                    "entitySet": "ZC_MaintNotifForScreeningQ",
+                    "customParams": "notifsForScreening",
+                    "staticParameters": {
+                        "scenario": "screening"
+                    },
+                    "tabs": [
+                        {
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#NotifsForScreeningByPriority",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#NmbrOfOpenMaintNotifications",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#NotifsForScreeningPresentation",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#NotifsForScreeningSelection",
+                            "value": "{{xtit.chartTabByPriority}}"
+                        },
+                        {
+                            "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#NotifsForScreeningByNotificationType",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#NmbrOfOpenMaintNotifications",
+                            "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#NotifsForScreeningPresentation",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#NotifsForScreeningSelection",
+                            "value": "{{xtit.chartTabByNotificationType}}"
+                        }
+                    ]
+                }
+            },
+            "card_OrdersForCompletion": {
+                "model": "ZEAM_ORDER_MONITOR_TRANSACTIONAL",
+                "template": "sap.ovp.cards.stack",
+                "settings": {
+                    "title": "{{xtit.ordersForCompletion}}",
+                    "entitySet": "ZC_MaintOrderForCompletionQ",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#OrdersForCompletionPresentation",
+                    "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OrdersForCompletionSelection",
+                    "objectStreamCardsSettings": {
+                        "showFirstActionInFooter": false,
+                        "customActions": [
+                            {
+                                "text": "{{xtit.completeTechnical}}",
+                                "press": "onTechnicalCompleteAction",
+                                "position": 3
+                            }
+                        ]
+                    },
+                    "customParams": "ordersForCompletion",
+                    "staticParameters": {
+                        "scenario": "completion"
+                    }
+                }
+            }
+        }
+    },
+    "sap.platform.hcp": {
+        "uri": ""
+    }
+}
